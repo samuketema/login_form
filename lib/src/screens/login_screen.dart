@@ -1,3 +1,5 @@
+import "dart:developer";
+
 import "package:flutter/material.dart";
 
 class LoginApp extends StatefulWidget{
@@ -18,6 +20,7 @@ class LoginAppState extends State<LoginApp>{
         child:Column(
           children: [
             emailField(),
+            passwordField()
           ],
         ) ,),
 
@@ -30,5 +33,14 @@ class LoginAppState extends State<LoginApp>{
       hintText: 'youremail@gmail'
     ),
   ) ;
+ }
+
+ Widget passwordField(){
+  return TextFormField(
+    decoration: InputDecoration(
+      hintText:'password',
+      labelText: 'Password'
+    ),
+  );
  }
 }

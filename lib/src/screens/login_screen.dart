@@ -12,11 +12,14 @@ class LoginApp extends StatefulWidget{
 
 class LoginAppState extends State<LoginApp>{
 
+  var formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(25.0),
       child: Form(
+        key: formKey,
         child:Column(
           children: [
             emailField(),
@@ -30,6 +33,12 @@ class LoginAppState extends State<LoginApp>{
   }
  Widget emailField() {
   return TextFormField(
+    validator: (String? value) {
+      if(value == null || !value.contains('@')){
+        return 'Please enter correct email';
+      }
+      return null;
+    },
     decoration: InputDecoration(
       labelText: 'Email Address',
       hintText: 'youremail@gmail'
@@ -39,6 +48,12 @@ class LoginAppState extends State<LoginApp>{
 
  Widget passwordField(){
   return TextFormField(
+    validator: (String? value){
+      if (value == null || value.length < 4 ){
+        return "Small characters";
+      }
+      return null;
+    },
     keyboardType:TextInputType.emailAddress ,
     decoration: InputDecoration(
       hintText:'password',
@@ -52,7 +67,12 @@ class LoginAppState extends State<LoginApp>{
       backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 22, 3, 147)),
       foregroundColor: MaterialStateProperty.all(Colors.white),
     ),
-    onPressed:(){},
+    onPressed:(){
+      if (formKey.currentState != null) {
+  formKey.currentState!.validate();
+  
+}
+    },
      child: Text('Submit'));
      
  }

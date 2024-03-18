@@ -1,6 +1,7 @@
 import "dart:developer";
 
 import "package:flutter/material.dart";
+import '../mixins/validation_mixin.dart';
 
 class LoginApp extends StatefulWidget{
   
@@ -10,7 +11,7 @@ class LoginApp extends StatefulWidget{
   }
 }
 
-class LoginAppState extends State<LoginApp>{
+class LoginAppState extends State<LoginApp> with ValidationMixin{
 
   var formKey = GlobalKey<FormState>();
   String email = "";
@@ -40,12 +41,7 @@ class LoginAppState extends State<LoginApp>{
       email = value;
       }
     },
-    validator: (String? value) {
-      if(value == null || !value.contains('@')){
-        return 'Please enter correct email';
-      }
-      return null;
-    },
+    validator: validateEmail,
     decoration: InputDecoration(
       labelText: 'Email Address',
       hintText: 'youremail@gmail'
@@ -60,12 +56,7 @@ class LoginAppState extends State<LoginApp>{
       password = value;
       }
     },
-    validator: (String? value){
-      if (value == null || value.length < 4 ){
-        return "Small characters";
-      }
-      return null;
-    },
+    validator: validatePassword ,
     keyboardType:TextInputType.emailAddress ,
     decoration: InputDecoration(
       hintText:'password',

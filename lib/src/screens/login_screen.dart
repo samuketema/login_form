@@ -20,7 +20,9 @@ class LoginAppState extends State<LoginApp>{
         child:Column(
           children: [
             emailField(),
-            passwordField()
+            passwordField(),
+            Container(margin: EdgeInsets.only(bottom: 25.0)),
+            submitButton()
           ],
         ) ,),
 
@@ -37,10 +39,21 @@ class LoginAppState extends State<LoginApp>{
 
  Widget passwordField(){
   return TextFormField(
+    keyboardType:TextInputType.emailAddress ,
     decoration: InputDecoration(
       hintText:'password',
       labelText: 'Password'
     ),
   );
+ }
+ Widget submitButton(){
+  return ElevatedButton(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 22, 3, 147)),
+      foregroundColor: MaterialStateProperty.all(Colors.white),
+    ),
+    onPressed:(){},
+     child: Text('Submit'));
+     
  }
 }
